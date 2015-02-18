@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/NewXMLSchema"
+	xmlns:tns="http://www.example.org/NewXMLSchema" elementFormDefault="qualified">
+
+	<element name="options" type="tns:options"></element>
+
+	<complexType name="options">
+		<choice maxOccurs="1">
+			<element name="tasks" type="tns:tasks" minOccurs="0"
+				maxOccurs="1" />
+			<element name="goals" type="tns:goals" minOccurs="0"
+				maxOccurs="1" />
+			<element name="plans" type="tns:plans" minOccurs="0"
+				maxOccurs="1" />
+			<element name="agreements" type="tns:agreements" minOccurs="0"
+				maxOccurs="1" />
+		</choice>
+	</complexType>
+
+	<complexType name="tasks">
+		<choice maxOccurs="1">
+			<element name="task" type="tns:task" minOccurs="1" maxOccurs="unbounded" />
+		</choice>
+	</complexType>
+
+	<complexType name="goals">
+		<choice maxOccurs="1">
+			<element name="goal" type="tns:goal" minOccurs="1" maxOccurs="unbounded" />
+		</choice>
+	</complexType>
+
+	<complexType name="plans">
+		<choice maxOccurs="1">
+			<element name="plan" type="tns:plan" minOccurs="1" maxOccurs="unbounded" />
+		</choice>
+	</complexType>
+
+	<complexType name="agreements">
+		<choice maxOccurs="1">
+			<element name="agreement" type="tns:agreement" minOccurs="1"
+				maxOccurs="unbounded" />
+		</choice>
+	</complexType>
+
+	<complexType name="task">
+		<choice maxOccurs="1">
+			<element name="title" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="fini" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="ffin" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="description" type="string" minOccurs="1"
+				maxOccurs="1" />
+			<element name="comment" type="string" minOccurs="1"
+				maxOccurs="1" />
+			<element name="place" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="time" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="origin" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="organization" type="string" minOccurs="1"
+				maxOccurs="1" />
+			<element name="record" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="importance" type="integer" minOccurs="1"
+				maxOccurs="1" />
+		</choice>
+	</complexType>
+
+	<complexType name="goal">
+		<attribute name="title" type="string"></attribute>
+		<attribute name="fini" type="string"></attribute>
+		<attribute name="ffin" type="string"></attribute>
+		<attribute name="comment" type="string"></attribute>
+		<attribute name="description" type="string"></attribute>
+		<attribute name="risk" type="string"></attribute>
+		<attribute name="importance" type="integer"></attribute>
+	</complexType>
+
+	<complexType name="plan">
+		<attribute name="title" type="string"></attribute>
+		<attribute name="fini" type="string"></attribute>
+		<attribute name="ffin" type="string"></attribute>
+		<attribute name="comment" type="string"></attribute>
+		<attribute name="description" type="string"></attribute>
+		<attribute name="measure" type="string"></attribute>
+		<attribute name="origin" type="string"></attribute>
+		<attribute name="supervisor" type="string"></attribute>
+	</complexType>
+
+	<complexType name="agreement">
+		<attribute name="title" type="string"></attribute>
+		<attribute name="fini" type="string"></attribute>
+		<attribute name="ffin" type="string"></attribute>
+		<attribute name="comment" type="string"></attribute>
+		<attribute name="description" type="string"></attribute>
+		<attribute name="origin" type="string"></attribute>
+		<attribute name="record" type="string"></attribute>
+		<attribute name="importance" type="integer"></attribute>
+	</complexType>
+
+</schema>

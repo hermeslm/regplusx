@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MenuConfig>
+    <Displayers>
+        <Displayer name="Velocity" type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
+    </Displayers>
+    <Menus>
+        <Menu name="Home" title="home.title" page="/home" roles="ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform" roles="ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" page="/admin/users">
+            <Item name="ViewUsers" title="menu.admin.users" page="/admin/users"/>
+            <Item name="ActiveUsers" title="home.activeUsers" page="/admin/activeUsers"/>
+            <Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload"/>
+            <Item name="FileUpload" title="menu.selectFile" page="/fileupload"/>
+        </Menu>
+        <Menu name="NomenclativeMenu" title="menu.nomenclative" description="Nomenclative Menu" page="/province" roles="ROLE_ADMIN,ROLE_USER">
+        	<Item name="ProvinceMenu" title="provinceList.title" page="/main/province"/>
+        	<Item name="CantonMenu" title="cantonList.title" page="/main/canton"/>
+        	<Item name="ParroquiaMenu" title="parroquiaList.title" page="/main/parroquia"/>
+        	<Item name="ClientMenu" title="clientList.title" page="/main/client"/>
+        	<Item name="ClientMenu" title="areaList.title" page="/main/area"/>
+        	<Item name="BookTypeMenu" title="bookTypeList.title" page="/main/booktype"/>
+        	<Item name="BookMenu" title="bookList.title" page="/main/book"/>
+        	<Item name="VolumeMenu" title="volumeList.title" page="/main/volume"/>
+        </Menu>
+        <Menu name="RegisteringMenu" title="menu.registering" description="Registering Menu" page="/record" roles="ROLE_ADMIN,ROLE_USER">
+        	<Item name="RecordTypeMenu" title="recordTypeList.title" page="/registering/recordtype"/>
+        	<Item name="RecordMenu" title="recordList.title" page="/registering/record"/>
+        	<Item name="CampanyMenu" title="companyList.title" page="/registering/company"/>
+        	<Item name="RepertoryMenu" title="repertoryList.title" page="/registering/repertory"/>
+        	<Item name="PropertyMenu"  title="propertyList.title" page="/registering/property"/>
+        	<Item name="TradePropertyMenu"  title="tradePropertyList.title" page="/registering/tradeproperty"/>
+        </Menu>
+        <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
+    </Menus>
+</MenuConfig>

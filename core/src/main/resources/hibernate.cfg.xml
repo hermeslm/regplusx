@@ -1,0 +1,36 @@
+<!-- NOTE: If you're working offline, you might have to change the DOCTYPE to the following:
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">-->
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+    
+  		<property name="hibernate.connection.autocommit">true</property>
+  		<property name="hibernate.generate_statistics">true</property>	
+    	<property name="hibernate.show_sql">true</property>
+    
+        <mapping class="org.appfuse.model.User"/>
+        <mapping class="org.appfuse.model.Role"/>
+        <mapping class="org.onedevelopment.model.Province"/>
+        <mapping class="org.onedevelopment.model.Canton"/>
+        <mapping class="org.onedevelopment.model.Parroquia"/>
+        <mapping class="org.onedevelopment.model.Client"/>
+        <mapping class="org.onedevelopment.model.Area"/>
+        <mapping class="org.onedevelopment.model.BookType"/>
+        <mapping class="org.onedevelopment.model.Book"/>
+        <mapping class="org.onedevelopment.model.Volume"/>
+        <mapping class="org.onedevelopment.model.Record"/>
+        <mapping class="org.onedevelopment.model.RecordType"/>
+        <mapping class="org.onedevelopment.model.State"/>
+        <mapping class="org.onedevelopment.model.Company"/>
+        <mapping class="org.onedevelopment.model.Repertory"/>
+        <mapping class="org.onedevelopment.model.AgreementType"/>
+        <mapping class="org.onedevelopment.model.PurchaserType"/>
+        <mapping class="org.onedevelopment.model.CompanyType"/>
+        <mapping class="org.onedevelopment.model.AppearingType"/>
+        <mapping class="org.onedevelopment.model.Property"/>
+        <mapping class="org.onedevelopment.model.TradeProperty"/>
+    </session-factory>
+</hibernate-configuration>

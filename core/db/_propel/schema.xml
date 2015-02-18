@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xsd/database.xsd"
+	defaultIdMethod="native" name="regplusx">
+	<table name="province"
+		description="Tabla que almacena los datos de las instituciones">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre de la Provincia" />
+	</table>
+	<table name="canton"
+		description="Tabla que almacena los datos de los Cantones">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del Canton" />
+		<column name="province_id" type="INTEGER" required="true" description="Provincia" />
+		<foreign-key foreignTable="province" onDelete="cascade" onUpdate="cascade">
+			<reference local="province_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="parroquia"
+		description="Tabla que almacena las Parroquias">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del Canton" />
+		<column name="canton_id" type="INTEGER" required="true" description="Canton" />
+		<foreign-key foreignTable="canton" onDelete="cascade" onUpdate="cascade">
+			<reference local="canton_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="client"
+		description="Tabla que almacena los Clientes">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del cliente" />
+		<column name="last_name" type="VARCHAR" size="250" required="true" description="Apellidos del cliente" />
+		<column name="address" type="VARCHAR" size="512" required="true" description="Direccion del cliente" />
+		<column name="province_id" type="INTEGER" required="true" description="Provincia" />
+		<column name="canton_id" type="INTEGER" required="true" description="Canton" />
+		<column name="parroquia_id" type="INTEGER" required="true" description="Parroquia" />
+		<foreign-key foreignTable="province" onDelete="cascade" onUpdate="cascade">
+			<reference local="province_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="canton" onDelete="cascade" onUpdate="cascade">
+			<reference local="canton_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="parroquia" onDelete="cascade" onUpdate="cascade">
+			<reference local="parroquia_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="area"
+		description="Tabla que almacena las Areas">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del Area" />
+	</table>
+	<table name="book_type"
+		description="Tabla que almacena los tipos de libros">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Tipo de Libro" />
+	</table>
+	<table name="book"
+		description="Tabla que almacena los libros de registros">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Descripcion del Libro" />
+		<column name="type_id" type="INTEGER" required="true" description="Tipo del Libro" />
+		<foreign-key foreignTable="book_type" onDelete="cascade" onUpdate="cascade">
+			<reference local="type_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="volume"
+		description="Tabla que almacena los Tomos de Libros">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Descripcion del Tomo" />
+		<column name="start_folio" type="INTEGER" required="true" description="Folio de Inicio" />
+		<column name="end_folio" type="INTEGER" required="true" description="Folio de Fin" />
+	</table>
+	<table name="state"
+		description="Tabla que almacena los Estados">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del Estado" />
+	</table>
+	<table name="record_type"
+		description="Tabla que almacena los Tipos de Registros">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="description" type="VARCHAR" size="250" description="Descripcion del tipo de Registro" />
+		<column name="value" type="FLOAT" description="Valor del Registro" />
+		<column name="percent" type="FLOAT" required="true" description="Porciento del Registro" />
+		<column name="book_id" type="INTEGER" required="true" description="Libro" />
+		<foreign-key foreignTable="book" onDelete="cascade" onUpdate="cascade">
+			<reference local="book_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="record"
+		description="Tabla que almacena los Registros">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="year" type="INTEGER" required="true" description="Ano de Registro" />
+		<column name="repertory" type="INTEGER" required="true" description="Repertorio del Registro" />
+		<column name="record" type="INTEGER" required="true" description="Registro" />
+		<column name="record_date" type="DATE" description="Fecha del Registro" />
+		<column name="afecta1" type="VARCHAR" size="20" description="Afecta1 de Registro" />
+		<column name="afecta2" type="VARCHAR" size="20" description="Afecta2 de Registro" />
+		<column name="notary_office" type="VARCHAR" size="250" required="true" description="Notaria o Jusgado del Registro" />
+		<column name="details" type="VARCHAR" size="512" required="true" description="Detalles de Registro" />
+		<column name="notarize_date" type="DATE" description="Fecha del Registro Notariado" />
+		<column name="book_id" type="INTEGER" required="true" description="Libro" />
+		<column name="volume_id" type="INTEGER" required="true" description="Tomo" />
+		<column name="folio" type="INTEGER" required="true" description="Folio" />
+		<column name="observations" type="VARCHAR" size="512" required="true" description="Observaciones de Registro" />
+		<column name="state_id" type="INTEGER" required="true" description="Estado" />
+		<foreign-key foreignTable="book" onDelete="cascade" onUpdate="cascade">
+			<reference local="book_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="volume" onDelete="cascade" onUpdate="cascade">
+			<reference local="volume_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="state" onDelete="cascade" onUpdate="cascade">
+			<reference local="state_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="repertory"
+		description="Tabla que almacena los Repertorios">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="day" type="VARCHAR" size="10" required="true" description="Dia del Repertorio" />
+		<column name="year" type="INTEGER" required="true" description="Repertorio" />
+		<column name="repertory" type="INTEGER" required="true" description="Repertorio del Registro" />
+		<column name="client_id" type="INTEGER" required="true" description="Cliente" />
+		<column name="reason_act" type="VARCHAR" size="15" required="true" description="Acto de Razon" />
+		<column name="name_act" type="VARCHAR" size="15" description="Acto Nombre" />
+		<column name="record_id" type="INTEGER" required="true" description="Duracion de la compania" />
+		<column name="observations" type="VARCHAR" size="512" description="Observaciones" />
+		<column name="invoice" type="INTEGER" required="true" description="Factura" />
+		<foreign-key foreignTable="client" onDelete="cascade" onUpdate="cascade">
+			<reference local="client_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="record" onDelete="cascade" onUpdate="cascade">
+			<reference local="record_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="company"
+		description="Tabla que almacena las companias">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="repertory" type="INTEGER" required="true" description="Repertorio de la Empresa" />
+		<column name="record_id" type="INTEGER" required="true" description="Registro" />
+		<column name="year" type="INTEGER" required="true" description="Ano de Registro" />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre de la Compania" />
+		<column name="agent" type="VARCHAR" size="250" required="true" description="Representante legal" />
+		<column name="opening_date" type="DATE" description="Fecha de apertura" />
+		<column name="duration" type="VARCHAR" size="250" required="true" description="Duracion de la compania" />
+		<column name="resolution" type="VARCHAR" size="250" description="Resolucion" />
+		<column name="ruc" type="VARCHAR" size="15" required="true" description="RUC de la compania" />
+		<foreign-key foreignTable="record" onDelete="cascade" onUpdate="cascade">
+			<reference local="record_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="property"
+		description="Tabla que almacena las Propiedades">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="year" type="INTEGER" required="true" description="Ano de Registro" />
+		<column name="repertory" type="INTEGER" required="true" description="Repertorio de la Empresa" />
+		<column name="record_id" type="INTEGER" required="true" description="Registro" />
+		<column name="key" type="VARCHAR" size="20" required="true" description="Clave de la Propiedad" />
+		<column name="property_number" type="VARCHAR" size="20" required="true" description="Numero de la Propiedad" />
+		<column name="block_number" type="VARCHAR" size="10" description="Numero de la Manzana" />
+		<column name="cooperative" type="VARCHAR" size="20" required="true" description="Cooperativa" />
+		<column name="surface" type="VARCHAR" size="10" description="Superficie de la Propiedad" />
+		<column name="parroquia_id" type="INTEGER" required="true" description="Parroquia" />
+		<column name="north" type="VARCHAR" size="20" description="Norte de la Propiedad" />
+		<column name="south" type="VARCHAR" size="20" description="Sur de la Propiedad" />
+		<column name="east" type="VARCHAR" size="20" description="Este de la Propiedad" />
+		<column name="west" type="VARCHAR" size="20" description="Oeste de la Propiedad" />
+		<column name="state_id" type="INTEGER" required="true" description="Estado" />
+		<column name="amount" type="FLOAT" description="Cuantia de la Propiedad" />
+		<column name="book_id" type="INTEGER" required="true" description="Libro" />
+		<column name="sales_people" type="VARCHAR" size="1024" description="Vendedores de la Propiedad" />
+		<column name="cancellation_date" type="DATE" description="Fecha de cancelacion de la Propiedad" />
+		<foreign-key foreignTable="record" onDelete="cascade" onUpdate="cascade">
+			<reference local="record_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="parroquia" onDelete="cascade" onUpdate="cascade">
+			<reference local="parroquia_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="state" onDelete="cascade" onUpdate="cascade">
+			<reference local="state_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="book" onDelete="cascade" onUpdate="cascade">
+			<reference local="book_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="client_property"
+		description="Tabla que almacena las Propiedades">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="year" type="INTEGER" required="true" description="Ano de Registro" />
+		<column name="repertory" type="INTEGER" required="true" description="Repertorio de la Empresa" />
+		<column name="record_id" type="INTEGER" required="true" description="Registro" />
+	</table>
+	<table name="agreement_type"
+		description="Tabla que almacena los tipos de Contratos">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del tipo de Contrato" />
+	</table>
+	<table name="purchaser_type"
+		description="Tabla que almacena los tipos de Compras">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del tipo de Compra" />
+	</table>
+	<table name="trade_property"
+		description="Tabla que almacena las Propiedades Mercantiles">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true" />
+		<column name="inscription_date" type="DATE" description="Fecha de inscripcion de la Propiedad Mercantil" />
+		<column name="inscription_number" type="VARCHAR" size="20" required="true" description="Numero de inscripcion de la Propiedad Mercantil" />
+		<column name="agreement_type_id" type="INTEGER" required="true" description="Tipo de Contrato de la Propiedad Mercantil" />
+		<column name="business_name" type="VARCHAR" size="256" required="true" description="Razon Social de la Propiedad Mercantil" />
+		<column name="purchaser_type_id" type="INTEGER" required="true" description="Tipo de Comprador de la Propiedad Mercantil" />
+		<column name="chassis" type="VARCHAR" size="20" required="true" description="Chasis/Serie de la de la Propiedad Mercantil" />
+		<column name="motor" type="VARCHAR" size="20" required="true" description="Motor de la Propiedad Mercantil" />
+		<column name="brand" type="VARCHAR" size="20" description="Marca de la Propiedad Mercantil" />
+		<column name="model" type="VARCHAR" size="20" required="true" description="Modelo de la Propiedad Mercantil" />
+		<column name="manufacture_date" type="VARCHAR" size="10" description="Fecha de Fabricacion de la Propiedad Mercantil" />
+		<column name="registration_number" type="VARCHAR" size="10" required="true" description="Placa de la Propiedad Mercantil" />
+		<column name="location" type="VARCHAR" size="250" description="Ubicacion de la Propiedad Mercantil" />
+		<column name="last_modification_date" type="DATE" description="Fecha de ultima modificacion de la Propiedad Mercantil" />
+		<column name="identification" type="VARCHAR" size="20" description="Identificacion de la Propiedad Mercantil" />
+		<column name="state_id" type="INTEGER" required="true" description="Estado" />
+		<column name="judged_letter" type="VARCHAR" size="20" description="Carta del Juzgado de la Propiedad Mercantil" />
+<!-- 		<column name="amount_not" type="VARCHAR" size="10" required="true" description="Cantidad de la Propiedad Mercantil" /> -->
+		<column name="agent" type="VARCHAR" size="1024" description="Representante Legal de la Propiedad Mercantil" />
+		<column name="contract_date" type="DATE" description="Fecha de contratacion de la Propiedad Mercantil" />
+		<column name="cancellation_date" type="DATE" description="Fecha de cancelacion de la Propiedad Mercantil" />
+		<foreign-key foreignTable="agreement_type" onDelete="cascade" onUpdate="cascade">
+			<reference local="agreement_type_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="purchaser_type" onDelete="cascade" onUpdate="cascade">
+			<reference local="purchaser_type_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="state" onDelete="cascade" onUpdate="cascade">
+			<reference local="state_id" foreign="id" />
+		</foreign-key>
+	</table>
+	<table name="company_type"
+		description="Tabla que almacena las especies de la compañia">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del tipo de Compañia" />
+	</table>
+	<table name="appearing_type"
+		description="Tabla que almacena los tipos de comparecientes">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"  />
+		<column name="name" type="VARCHAR" size="250" required="true" description="Nombre del tipo de Compareciente" />
+	</table>
+	<table name="society_trade_property"
+		description="Tabla que almacena las Propiedades Mercantiles en Sociedad">
+		<column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true" />
+		<column name="company_name" type="VARCHAR" size="250" required="true" description="Nombre de la Compañia de la Propiedad Mercantil en Sociedad" />
+		<column name="identification_number" type="VARCHAR" size="20" required="true" description="Numero de identificacion de la Propiedad Mercantil en Sociedad" />
+		<column name="cedula" type="VARCHAR" size="15" required="true" description="Cedula de la Propiedad Mercantil en Sociedad" />
+		<column name="position" type="VARCHAR" size="255" required="true" description="Cargo de la Propiedad Mercantil en Sociedad" />
+		<column name="appearing_type_id" type="INTEGER" required="true" description="Tipo de Compareciente" />
+		<column name="disposition" type="VARCHAR" size="255" required="true" description="Disposicion de la Propiedad Mercantil en Sociedad" />
+		<column name="data_issuing_authority" type="VARCHAR" size="250" required="true" description="Autoridad emisora de datos de la Propiedad Mercantil en Sociedad" />
+		<column name="disposition_date" type="DATE" description="Fecha de disposicion de la Propiedad Mercantil en Sociedad" />
+		<column name="disposition_number" type="VARCHAR" size="50" description="Numero de disposicion de la Propiedad Mercantil en Sociedad" />
+		<column name="inscription_date" type="DATE" description="Fecha de inscripcion de la Propiedad Mercantil en Sociedad" />
+		<column name="judged_letter" type="VARCHAR" size="20" description="Nota del Juzgado de la Propiedad Mercantil en Sociedad" />
+<!-- 		<column name="amount_not" type="VARCHAR" size="10" required="true" description="Cantidad de la Propiedad Mercantil" /> -->
+		<column name="processing_type" type="VARCHAR" size="50" description="Tipo de Tramite de la Propiedad Mercantil en Sociedad" />
+		<column name="location" type="VARCHAR" size="250" description="Ubicacion de la Propiedad Mercantil en Sociedad" />
+		<column name="last_modification_source" type="VARCHAR" size="250" description="Ultima fuente de modificacion de la Propiedad Mercantil en Sociedad" />		
+		<column name="remote_sistem_identification" type="VARCHAR" size="250" description="Sistema de identificacion remoto de la Propiedad Mercantil en Sociedad" />
+		<column name="cancellation_date" type="DATE" description="Fecha de cancelacion de la Propiedad Mercantil en Sociedad" />
+		<column name="state_id" type="INTEGER" required="true" description="Estado" />
+		<foreign-key foreignTable="appearing_type" onDelete="cascade" onUpdate="cascade">
+			<reference local="appearing_type_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="state" onDelete="cascade" onUpdate="cascade">
+			<reference local="state_id" foreign="id" />
+		</foreign-key>
+	</table>
+</database>
